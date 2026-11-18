@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Continuous Tense Adventure - สื่อการเรียนรู้ ม.2</title>
+    <!-- นำเข้า Google Fonts: Prompt และ Fredoka สำหรับฟอนต์ภาษาไทยและอังกฤษสไตล์การ์ตูนที่อ่านง่าย -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Prompt:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- นำเข้า Tailwind CSS สำหรับการจัดวาง Layout และ Responsive Design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                        en: ['Fredoka', 'Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        animeYellow: '#FEF08A',
+                        animeYellowDark: '#FACC15',
+                        animeBlue: '#38BDF8',
+                        animeBlueDark: '#0284C7',
+                        animeBg: '#FEFCE8',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* สไตล์ตกแต่งธีมอนิเมะฟ้า-เหลืองสดใสและการเคลื่อนไหว (Animations) */
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #FEFCE8;
+            background-image: 
+                radial-gradient(#BAE6FD 3px, transparent 3px),
+                radial-gradient(#FEF08A 3px, #FEFCE8 3px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            overflow-x: hidden;
+        }
+
+        .font-en {
+            font-family: 'Fredoka', 'Prompt', sans-serif;
+        }
+
+        /* กรอบสไตล์การ์ตูนอนิเมะมีเงาแข็งน่ารัก */
+        .anime-card {
+            background: rgba(255, 255, 255, 0.96);
+            border: 3px solid #1E293B;
+            box-shadow: 6px 6px 0px #1E293B;
+            border-radius: 1.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .anime-btn {
+            border: 3px solid #1E293B;
+            box-shadow: 4px 4px 0px #1E293B;
+            border-radius: 1rem;
+            font-weight: 600;
+            transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .anime-btn:hover:not(:disabled) {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #1E293B;
+        }
+
+        .anime-btn:active:not(:disabled) {
+            transform: translate(3px, 3px);
+            box-shadow: 1px 1px 0px #1E293B;
+        }
+
+        .anime-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* อนิเมชั่นตัวละครมาสคอตลอยตัวเบาๆ */
+        @keyframes floatMascot {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1.5deg); }
+        }
+        .mascot-float {
+            animation: floatMascot 3s ease-in-out infinite;
+        }
+
+        /* อนิเมชั่นกระโดดดีใจเมื่อตอบถูก */
+        @keyframes jumpHappy {
+            0%, 100% { transform: translateY(0) scale(1); }
+            30% { transform: translateY(-18px) scale(1.06); }
+            50% { transform: translateY(0) scale(0.96); }
+            70% { transform: translateY(-8px) scale(1.02); }
+        }
+        .mascot-happy {
+            animation: jumpHappy 0.7s ease-out;
+        }
+
+        /* อนิเมชั่นสั่นเบาๆ เมื่อตอบผิด */
+        @keyframes shakeSad {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px) rotate(-2deg); }
+            40%, 80% { transform: translateX(8px) rotate(2deg); }
+        }
+        .mascot-sad {
+            animation: shakeSad 0.5s ease-in-out;
+        }
+
+        /* อนิเมชั่นสั่นของโทรศัพท์ในฉากจำลอง */
+        @keyframes ringPhone {
+            0%, 100% { transform: rotate(0deg) scale(1.15); }
+            25% { transform: rotate(-18deg) scale(1.25); }
+            75% { transform: rotate(18deg) scale(1.25); }
+        }
+        .phone-ringing {
+            animation: ringPhone 0.25s infinite;
+        }
+
+        /* เอฟเฟกต์ดาว/พลุกระจาย */
+        @keyframes popStar {
+            0% { transform: scale(0) rotate(0deg); opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: scale(1.6) rotate(180deg); opacity: 0; }
+        }
+        .confetti-star {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            animation: popStar 0.9s ease-out forwards;
+        }
+
+        /* แถบเลื่อนสไตล์น่ารัก */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FEF08A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #38BDF8;
+            border-radius: 999px;
+            border: 2px solid #1E293B;
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col">
+
+    <!-- แถบเมนูนำทางด้านบน (Top Navigation Bar) ตกแต่งหัวข้อคู่กับรูปการ์ตูนจิบิ (Chibi Mascot) -->
+    <header class="sticky top-0 z-45 bg-yellow-200/95 backdrop-blur-md border-b-4 border-slate-800 shadow-sm">
+        <div class="max-w-6xl mx-auto px-3 sm:px-6 py-2 flex flex-wrap items-center justify-between gap-2">
+            <!-- โลโก้, รูปการ์ตูนจิบิ และชื่อบทเรียน -->
+            <div onclick="switchScreen('home')" class="flex items-center gap-3 cursor-pointer group">
+                <!-- รูปการ์ตูนจิบิขนาดเล็กน่ารักที่หัวข้อ -->
+                <div class="w-12 h-12 rounded-2xl bg-sky-300 border-2 border-slate-800 shadow-[2px_2px_0px_#1E293B] overflow-hidden flex items-center justify-center p-0.5 group-hover:rotate-6 transition-transform">
+                    <svg viewBox="0 0 200 200" class="w-full h-full">
+                        <!-- หน้าจิบิย่อส่วน -->
+                        <path d="M 52 85 C 52 48, 148 48, 148 85 C 148 125, 125 142, 100 142 C 75 142, 52 125, 52 85 Z" fill="#FFE4D6" stroke="#1E293B" stroke-width="4"/>
+                        <path d="M 46 85 C 46 42, 154 42, 154 85" stroke="#1E293B" stroke-width="7" fill="none" stroke-linecap="round"/>
+                        <polygon points="48,58 38,28 70,45" fill="#38BDF8" stroke="#1E293B" stroke-width="3" stroke-linejoin="round"/>
+                        <polygon points="152,58 162,28 130,45" fill="#38BDF8" stroke="#1E293B" stroke-width="3" stroke-linejoin="round"/>
+                        <!-- ตาจิบิวิ้งๆ -->
+                        <ellipse cx="74" cy="95" rx="8" ry="10" fill="#1E293B"/>
+                        <circle cx="71" cy="91" r="3.5" fill="#FFFFFF"/>
+                        <ellipse cx="126" cy="95" rx="8" ry="10" fill="#1E293B"/>
+                        <circle cx="123" cy="91" r="3.5" fill="#FFFFFF"/>
+                        <path d="M 93 115 Q 100 122 107 115" stroke="#1E293B" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <path d="M 50 86 C 50 42, 150 42, 150 86 C 140 65, 128 76, 122 85 C 115 64, 105 75, 100 86 C 92 64, 82 75, 76 85 C 68 65, 58 76, 50 86 Z" fill="#FACC15" stroke="#1E293B" stroke-width="3.5" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="font-en font-bold text-base sm:text-xl text-slate-800 leading-tight flex items-center gap-1.5">
+                        Past Continuous <span class="text-sky-600 bg-white px-2 py-0.5 rounded-lg border border-slate-800 text-xs shadow-[1px_1px_0px_#1E293B]">Quest! 🌟</span>
+                    </h1>
+                    <p class="text-[11px] sm:text-xs text-slate-600 font-bold">สื่อโต้ตอบภาษาอังกฤษ ม.2 (ธีมฟ้า-เหลืองสดใส)</p>
+                </div>
+            </div>
+
+            <!-- ปุ่มสลับโหมดหน้าจอ (Navigation Tabs) -->
+            <nav class="flex items-center gap-1.5 sm:gap-2.5">
+                <button id="nav-home" onclick="switchScreen('home')" class="anime-btn px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm bg-sky-300 text-slate-900 flex items-center gap-1.5">
+                    <span>🏠</span> <span class="hidden sm:inline">หน้าหลัก</span>
+                </button>
+                <button id="nav-lesson" onclick="switchScreen('lesson')" class="anime-btn px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm bg-white text-slate-800 flex items-center gap-1.5">
+                    <span>📚</span> <span>สรุปบทเรียน</span>
+                </button>
+                <button id="nav-quiz" onclick="switchScreen('quiz')" class="anime-btn px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm bg-white text-slate-800 flex items-center gap-1.5">
+                    <span>🎮</span> <span>เกมทดสอบ</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- พื้นที่เนื้อหาหลัก (Main Content Container) -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-3 sm:px-6 py-6 sm:py-8">
+
+        <!-- ========================================== -->
+        <!-- 1. หน้าต้อนรับ (HOME / WELCOME SCREEN)       -->
+        <!-- ========================================== -->
+        <section id="screen-home" class="space-y-6">
+            <div class="anime-card p-6 sm:p-10 bg-gradient-to-br from-yellow-100 via-white to-sky-100 relative overflow-hidden">
+                <!-- ของตกแต่งพื้นหลังอนิเมะ -->
+                <div class="absolute -top-6 -right-6 w-32 h-32 bg-yellow-300 rounded-full opacity-50 blur-xl pointer-events-none"></div>
+                <div class="absolute -bottom-8 -left-8 w-40 h-40 bg-sky-300 rounded-full opacity-50 blur-xl pointer-events-none"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                    <!-- ฝั่งซ้าย: มาสคอตอนิเมะทักทาย -->
+                    <div class="lg:col-span-5 flex flex-col items-center">
+                        <div id="home-mascot-container" class="w-52 h-52 sm:w-64 sm:h-64 mascot-float">
+                            <!-- SVG มาสคอต "น้องมิ้นท์ (Mint-chan)" ถูกแทรกด้วย JS -->
+                        </div>
+                        <div class="mt-2 bg-white border-2 border-slate-800 rounded-2xl px-4 py-2 shadow-[3px_3px_0px_#1E293B] text-center max-w-xs">
+                            <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">✨ Guide Mascot</span>
+                            <p id="home-speech" class="text-sm font-medium text-slate-700 mt-0.5">
+                                "สวัสดีจ้า! มาเรียนรู้เรื่องเหตุการณ์ที่กำลังดำเนินอยู่ในอดีตกันเถอะ!"
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- ฝั่งขวา: ข้อความต้อนรับและปุ่มเริ่มใช้งาน -->
+                    <div class="lg:col-span-7 text-center lg:text-left space-y-5">
+                        <div class="inline-flex items-center gap-2 bg-yellow-200 border-2 border-slate-800 px-3.5 py-1 rounded-full text-xs sm:text-sm font-bold text-slate-800 shadow-[2px_2px_0px_#1E293B]">
+                            <span>🌟 วิชาภาษาอังกฤษ ชั้นมัธยมศึกษาปีที่ 2</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-5xl font-bold text-slate-900 leading-tight">
+                            ตะลุยโลกไวยากรณ์<br>
+                            <span class="font-en text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-amber-600 to-yellow-600">
+                                Past Continuous Tense
+                            </span>
+                        </h2>
+                        <p class="text-slate-600 text-base sm:text-lg leading-relaxed">
+                            เรียนรู้โครงสร้างประโยค หลักการใช้ <span class="font-en font-bold text-sky-600">was / were + V.ing</span> 
+                            พร้อมทดลองเล่น<strong>กราฟเส้นเวลาอนิเมชั่นแบบ Real-time</strong> และพิชิตภารกิจ<strong>เกมตอบคำถาม 10 ข้อ</strong> เพื่อรับเหรียญรางวัลอนิเมะสุดเท่!
+                        </p>
+
+                        <!-- ปุ่ม Action หลัก 2 ปุ่ม -->
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                            <button onclick="switchScreen('lesson')" class="anime-btn w-full sm:w-auto px-7 py-4 bg-sky-300 hover:bg-sky-200 text-slate-900 text-lg flex items-center justify-center gap-2.5">
+                                <span class="text-2xl">📚</span>
+                                <span>เริ่มทบทวนบทเรียน</span>
+                            </button>
+                            <button onclick="startNewQuiz()" class="anime-btn w-full sm:w-auto px-7 py-4 bg-yellow-300 hover:bg-yellow-200 text-slate-900 text-lg flex items-center justify-center gap-2.5">
+                                <span class="text-2xl">🎮</span>
+                                <span>เล่นเกมทดสอบ (10 ข้อ)</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- การ์ดจุดเด่น 3 ใบ (ธีมฟ้า-เหลือง) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+                <div class="anime-card p-5 bg-yellow-50 flex items-start gap-4">
+                    <div class="text-3xl bg-yellow-300 p-3 rounded-2xl border-2 border-slate-800">📖</div>
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-800">สรุปครบจบเข้าใจง่าย</h3>
+                        <p class="text-sm text-slate-600 mt-1">ครบทั้งประโยคบอกเล่า ปฏิเสธ คำถาม และตารางแยกการใช้ was / were ชัดเจน</p>
+                    </div>
+                </div>
+                <div class="anime-card p-5 bg-sky-50 flex items-start gap-4">
+                    <div class="text-3xl bg-sky-300 p-3 rounded-2xl border-2 border-slate-800">⏱️</div>
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-800">กราฟเวลา Real-time</h3>
+                        <p class="text-sm text-slate-600 mt-1">กดจำลองเหตุการณ์ดูความแตกต่างระหว่าง Past Continuous และ Past Simple แบบเห็นภาพ</p>
+                    </div>
+                </div>
+                <div class="anime-card p-5 bg-amber-50 flex items-start gap-4">
+                    <div class="text-3xl bg-amber-300 p-3 rounded-2xl border-2 border-slate-800">🏆</div>
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-800">เกมควิซพร้อมเฉลย</h3>
+                        <p class="text-sm text-slate-600 mt-1">ทดสอบความเข้าใจ 10 ข้อ เก็บคะแนนสะสมแบบเรียลไทม์ พร้อมคำอธิบายละเอียดทุกข้อ</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 2. หน้าบทเรียน (INTERACTIVE LESSON SCREEN)  -->
+        <!-- ========================================== -->
+        <section id="screen-lesson" class="hidden space-y-8">
+            <!-- หัวข้อบทเรียน -->
+            <div class="anime-card p-5 sm:p-6 bg-gradient-to-r from-sky-400 to-yellow-300 text-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <span class="bg-slate-900 text-white px-3 py-1 rounded-full text-xs font-bold">UNIT: PAST CONTINUOUS TENSE</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold mt-1 text-slate-900">📚 สรุปหลักไวยากรณ์ฉบับเข้าใจไว</h2>
+                    <p class="text-slate-800 text-sm sm:text-base mt-1">ใช้เล่าถึง <strong>"เหตุการณ์ที่กำลังดำเนินอยู่ในอดีต"</strong> ณ ช่วงเวลาหนึ่ง</p>
+                </div>
+                <button onclick="startNewQuiz()" class="anime-btn px-5 py-3 bg-white text-slate-900 text-sm sm:text-base whitespace-nowrap">
+                    พร้อมแล้ว! ไปเล่นเกมเลย 🎮
+                </button>
+            </div>
+
+            <!-- ส่วนที่ 2.1: โครงสร้างประโยคทั้ง 3 รูปแบบ & ปุ่มสลับ was/were -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- โครงสร้าง 3 รูปแบบ -->
+                <div class="lg:col-span-7 anime-card p-5 sm:p-6 space-y-4">
+                    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                        <span class="bg-yellow-300 text-slate-900 w-8 h-8 rounded-lg border-2 border-slate-800 flex items-center justify-center text-sm font-bold">1</span>
+                        โครงสร้างประโยค (Sentence Structures)
+                    </h3>
+
+                    <!-- บอกเล่า -->
+                    <div class="p-4 rounded-2xl bg-yellow-50 border-2 border-yellow-400">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-bold text-yellow-800 text-sm">➕ ประโยคบอกเล่า (Affirmative)</span>
+                        </div>
+                        <div class="font-en font-bold text-lg sm:text-xl text-slate-800 bg-white px-3 py-2 rounded-xl border border-yellow-300">
+                            Subject + <span class="text-sky-600">was / were</span> + <span class="text-amber-600">V.ing</span>
+                        </div>
+                        <p class="text-sm text-slate-600 mt-2">
+                            ตัวอย่าง: <span class="font-en font-semibold text-slate-800">She was reading a book at 8 p.m.</span><br>
+                            <span class="text-xs text-slate-500">(เธอกำลังอ่านหนังสืออยู่ตอน 2 ทุ่มเมื่อคืนนี้)</span>
+                        </p>
+                    </div>
+
+                    <!-- ปฏิเสธ -->
+                    <div class="p-4 rounded-2xl bg-sky-50 border-2 border-sky-300">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-bold text-sky-800 text-sm">➖ ประโยคปฏิเสธ (Negative)</span>
+                        </div>
+                        <div class="font-en font-bold text-lg sm:text-xl text-slate-800 bg-white px-3 py-2 rounded-xl border border-sky-300">
+                            Subject + <span class="text-rose-600">wasn't / weren't</span> + <span class="text-amber-600">V.ing</span>
+                        </div>
+                        <p class="text-sm text-slate-600 mt-2">
+                            ตัวอย่าง: <span class="font-en font-semibold text-slate-800">They weren't playing football yesterday.</span><br>
+                            <span class="text-xs text-slate-500">(พวกเขาไม่ได้กำลังเล่นฟุตบอลเมื่อวานนี้)</span>
+                        </p>
+                    </div>
+
+                    <!-- คำถาม -->
+                    <div class="p-4 rounded-2xl bg-amber-50 border-2 border-amber-300">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-bold text-amber-800 text-sm">❓ ประโยคคำถาม (Interrogative)</span>
+                        </div>
+                        <div class="font-en font-bold text-lg sm:text-xl text-slate-800 bg-white px-3 py-2 rounded-xl border border-amber-300">
+                            <span class="text-sky-600">Was / Were</span> + Subject + <span class="text-amber-600">V.ing</span> ?
+                        </div>
+                        <p class="text-sm text-slate-600 mt-2">
+                            ตัวอย่าง: <span class="font-en font-semibold text-slate-800">Were you sleeping when I called?</span><br>
+                            <span class="text-xs text-slate-500">(เธอกำลังหลับอยู่ใช่ไหมตอนที่ฉันโทรไป?)</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ปุ่มกดสลับดูหลักการใช้ WAS vs WERE แบบโต้ตอบ -->
+                <div class="lg:col-span-5 anime-card p-5 sm:p-6 bg-yellow-50 flex flex-col justify-between space-y-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                            <span class="bg-sky-400 text-slate-900 w-8 h-8 rounded-lg border-2 border-slate-800 flex items-center justify-center text-sm font-bold">2</span>
+                            เลือกใช้ Was หรือ Were ดีนะ?
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-600 mt-1">ลองกดปุ่มด้านล่างเพื่อดูกลุ่มประธานที่ใช้คู่กัน!</p>
+
+                        <!-- ปุ่มสลับ -->
+                        <div class="grid grid-cols-2 gap-3 mt-4">
+                            <button id="btn-toggle-was" onclick="toggleVerbBe('was')" class="anime-btn py-3 bg-sky-300 text-slate-900 font-en text-xl">
+                                WAS
+                            </button>
+                            <button id="btn-toggle-were" onclick="toggleVerbBe('were')" class="anime-btn py-3 bg-white text-slate-700 font-en text-xl">
+                                WERE
+                            </button>
+                        </div>
+
+                        <!-- กล่องแสดงรายละเอียด Was / Were -->
+                        <div id="verb-be-display" class="mt-4 bg-white border-2 border-slate-800 rounded-2xl p-4 shadow-[3px_3px_0px_#1E293B]">
+                            <!-- อัปเดตเนื้อหาด้วย JS -->
+                        </div>
+                    </div>
+
+                    <!-- ทริคการเติม V.ing สั้นๆ -->
+                    <div class="bg-sky-100 border-2 border-sky-400 rounded-2xl p-3.5 text-xs sm:text-sm">
+                        <p class="font-bold text-sky-900 mb-1">💡 ทริคเติม -ing ท้ายคำกริยา:</p>
+                        <ul class="list-disc list-inside text-slate-700 space-y-1">
+                            <li>ลงท้ายด้วย <b>e</b> ตัด e ทิ้งแล้วเติม ing (เช่น write → <span class="font-en font-bold">writing</span>)</li>
+                            <li>สระเสียงสั้น 1 ตัว + ตัวสะกด 1 ตัว เบิ้ลตัวสะกด (เช่น run → <span class="font-en font-bold">running</span>, swim → <span class="font-en font-bold">swimming</span>)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ส่วนที่ 2.2: การโต้ตอบ & ภาพเคลื่อนไหวแบบ Real-time (INTERACTIVE TIMELINE & ANIMATION) -->
+            <div class="anime-card p-5 sm:p-8 bg-gradient-to-b from-white to-yellow-50 space-y-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-2 border-slate-200 pb-4">
+                    <div>
+                        <span class="bg-yellow-200 text-slate-800 border border-slate-800 px-3 py-0.5 rounded-full text-xs font-bold">✨ INTERACTIVE SIMULATION</span>
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mt-1">
+                            🎬 กราฟเส้นเวลา & อนิเมชั่นจำลองเหตุการณ์แบบ Real-time
+                        </h3>
+                        <p class="text-sm text-slate-600">เลือกสถานการณ์จำลองด้านล่าง แล้วกดปุ่ม <strong>"▶ เล่นอนิเมชั่น"</strong> เพื่อดูการทำงานของ Tense บนเส้นเวลา!</p>
+                    </div>
+
+                    <!-- ปุ่มเลือกสถานการณ์ 3 แบบตามหลักการใช้งาน -->
+                    <div class="flex flex-wrap gap-2">
+                        <button id="sim-tab-1" onclick="selectScenario(1)" class="anime-btn px-3.5 py-2 text-xs sm:text-sm bg-yellow-300 text-slate-900">
+                            1. กำลังทำ ณ เวลาเจาะจง
+                        </button>
+                        <button id="sim-tab-2" onclick="selectScenario(2)" class="anime-btn px-3.5 py-2 text-xs sm:text-sm bg-white text-slate-700">
+                            2. กำลังทำอยู่ + มีเหตุการณ์แทรก
+                        </button>
+                        <button id="sim-tab-3" onclick="selectScenario(3)" class="anime-btn px-3.5 py-2 text-xs sm:text-sm bg-white text-slate-700">
+                            3. ทำ 2 อย่างพร้อมกันในอดีต
+                        </button>
+                    </div>
+                </div>
+
+                <!-- เวทีจำลองเหตุการณ์ (Animation Stage) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    <!-- เวทีตัวละครอนิเมชั่น -->
+                    <div class="lg:col-span-6 bg-slate-900 rounded-3xl border-4 border-slate-800 p-5 text-white relative overflow-hidden min-h-[250px] flex flex-col justify-between shadow-inner">
+                        <!-- ป้ายบอกเวลาบนเวที -->
+                        <div class="flex justify-between items-center z-10">
+                            <span id="stage-badge" class="bg-yellow-300 text-slate-950 font-bold text-xs px-3 py-1 rounded-full border border-slate-800">
+                                สถานการณ์ที่ 1
+                            </span>
+                            <span id="stage-clock" class="font-en bg-slate-800 border border-slate-600 px-3 py-1 rounded-xl text-yellow-300 font-bold text-sm">
+                                🕒 07:30 PM (Yesterday)
+                            </span>
+                        </div>
+
+                        <!-- พื้นที่แสดงตัวละคร SVG เคลื่อนไหว -->
+                        <div id="stage-scene" class="my-4 flex items-center justify-around relative min-h-[130px]">
+                            <!-- ถูกสร้างด้วย JS ตามสถานการณ์ที่เลือก -->
+                        </div>
+
+                        <!-- คำบรรยายใต้ฉาก -->
+                        <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-3 text-center z-10">
+                            <p id="stage-en-text" class="font-en text-base sm:text-lg font-bold text-yellow-300">
+                                Mint was reading a book at 8:00 p.m. yesterday.
+                            </p>
+                            <p id="stage-th-text" class="text-xs sm:text-sm text-slate-300 mt-0.5">
+                                มิ้นท์กำลังอ่านหนังสืออยู่ตอน 2 ทุ่มเมื่อวานนี้
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- กราฟเส้นเวลา Real-time (SVG Timeline Graph) -->
+                    <div class="lg:col-span-6 space-y-4">
+                        <div class="bg-white border-2 border-slate-800 rounded-2xl p-4 sm:p-5 shadow-[4px_4px_0px_#1E293B]">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-sm text-slate-700">📈 กราฟเส้นเวลา (Real-time Timeline)</span>
+                                <span id="timeline-status" class="text-xs font-bold text-sky-600">พร้อมเล่นอนิเมชั่น</span>
+                            </div>
+
+                            <!-- SVG Timeline -->
+                            <svg id="timeline-svg" viewBox="0 0 500 175" class="w-full h-auto bg-slate-50 rounded-xl border border-slate-200">
+                                <!-- เส้นแกนเวลาหลัก (Past -> Now -> Future) -->
+                                <line x1="30" y1="135" x2="470" y2="135" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
+                                <polygon points="470,135 460,129 460,141" fill="#64748B"/>
+                                
+                                <!-- จุดแบ่ง Past / Now -->
+                                <line x1="390" y1="25" x2="390" y2="145" stroke="#94A3B8" stroke-width="2" stroke-dasharray="5,5"/>
+                                <text x="200" y="160" text-anchor="middle" font-size="13" font-weight="bold" fill="#475569">อดีต (PAST)</text>
+                                <text x="390" y="160" text-anchor="middle" font-size="13" font-weight="bold" fill="#EF4444">ปัจจุบัน (NOW)</text>
+
+                                <!-- เลเยอร์สำหรับวาดเส้นกราฟเคลื่อนไหวแบบ Real-time -->
+                                <g id="timeline-dynamic-layer"></g>
+
+                                <!-- ตัวชี้เวลาปัจจุบัน (Playhead) -->
+                                <g id="timeline-playhead" transform="translate(60, 0)">
+                                    <line x1="0" y1="20" x2="0" y2="135" stroke="#F59E0B" stroke-width="2.5"/>
+                                    <circle cx="0" cy="135" r="6" fill="#F59E0B" stroke="#1E293B" stroke-width="2"/>
+                                </g>
+                            </svg>
+
+                            <!-- ปุ่มควบคุมการเล่นอนิเมชั่น -->
+                            <div class="flex items-center gap-3 mt-4">
+                                <button id="btn-play-sim" onclick="playSimulation()" class="anime-btn flex-1 py-2.5 px-4 bg-yellow-300 hover:bg-yellow-200 text-slate-900 text-sm sm:text-base flex items-center justify-center gap-2">
+                                    <span>▶</span> <span>เล่นอนิเมชั่น Real-time</span>
+                                </button>
+                                <button onclick="resetSimulation()" class="anime-btn py-2.5 px-4 bg-slate-200 hover:bg-slate-100 text-slate-800 text-sm">
+                                    ↺ รีเซ็ต
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- กล่องสรุปกฎของสถานการณ์นี้ -->
+                        <div id="scenario-rule-box" class="bg-yellow-100 border-2 border-yellow-400 rounded-2xl p-4 text-sm text-slate-800">
+                            <!-- อัปเดตอัตโนมัติตามสถานการณ์ -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 3. หน้าเกมทดสอบ (INTERACTIVE QUIZ GAME)     -->
+        <!-- ========================================== -->
+        <section id="screen-quiz" class="hidden space-y-5">
+            <!-- แถบสถานะเกมด้านบน: คะแนนแบบเรียลไทม์, ข้อที่, คอมโบ -->
+            <div class="anime-card p-4 bg-white flex flex-wrap items-center justify-between gap-4">
+                <!-- ความคืบหน้าข้อที่ 1-10 -->
+                <div class="flex-1 min-w-[200px]">
+                    <div class="flex justify-between text-xs sm:text-sm font-bold mb-1.5">
+                        <span class="text-slate-700">คำถามข้อที่ <span id="quiz-current-num" class="text-sky-600 text-base">1</span> / 10</span>
+                        <span id="quiz-progress-pct" class="text-yellow-600 font-bold">10%</span>
+                    </div>
+                    <div class="w-full h-4 bg-slate-200 rounded-full border-2 border-slate-800 overflow-hidden">
+                        <div id="quiz-progress-bar" class="h-full bg-gradient-to-r from-sky-400 to-yellow-400 transition-all duration-300" style="width: 10%;"></div>
+                    </div>
+                </div>
+
+                <!-- คะแนนสะสมเรียลไทม์ & คอมโบ -->
+                <div class="flex items-center gap-3">
+                    <div id="combo-badge" class="hidden bg-orange-100 border-2 border-orange-500 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold text-orange-600">
+                        🔥 Combo x<span id="quiz-combo">0</span>
+                    </div>
+                    <div class="bg-yellow-300 border-2 border-slate-800 px-4 py-1.5 rounded-2xl shadow-[3px_3px_0px_#1E293B] flex items-center gap-2">
+                        <span class="text-xl">⭐</span>
+                        <div>
+                            <div class="text-[10px] font-bold text-slate-700 leading-none">คะแนนสะสม</div>
+                            <div class="font-en font-bold text-lg sm:text-xl text-slate-900 leading-tight">
+                                <span id="quiz-score">0</span> <span class="text-xs font-normal">/ 10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- พื้นที่เล่นเกมหลัก -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <!-- ฝั่งซ้าย: มาสคอตคอยเชียร์และเปลี่ยนสีหน้าตามคำตอบ -->
+                <div class="lg:col-span-4 anime-card p-5 bg-gradient-to-b from-yellow-50 to-sky-50 flex flex-row lg:flex-col items-center gap-4">
+                    <div id="quiz-mascot-container" class="w-28 h-28 sm:w-40 sm:h-40 flex-shrink-0 mascot-float">
+                        <!-- SVG มาสคอตเปลี่ยนสีหน้าได้ -->
+                    </div>
+                    <div class="flex-1 bg-white border-2 border-slate-800 rounded-2xl p-3.5 shadow-[3px_3px_0px_#1E293B] relative w-full">
+                        <span class="text-[11px] font-bold text-sky-600 block mb-1">💬 น้องมิ้นท์:</span>
+                        <p id="quiz-mascot-msg" class="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed">
+                            "อ่านโจทย์ให้ดีนะ ดูประธานกับคำบอกเวลาให้แม่นยำ สู้ๆ จ้า!"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ฝั่งขวา: กล่องโจทย์ ตัวเลือก A B C D และคำอธิบายหลังตอบ -->
+                <div class="lg:col-span-8 anime-card p-5 sm:p-7 space-y-5">
+                    <!-- ป้ายหมวดหมู่ของข้อสอบ -->
+                    <div class="flex items-center justify-between">
+                        <span id="quiz-category" class="bg-yellow-100 text-yellow-800 border border-yellow-400 px-3 py-1 rounded-full text-xs font-bold">
+                            หมวด: การใช้ was / were
+                        </span>
+                        <span class="text-xs text-slate-400 font-medium">เลือกคำตอบที่ถูกต้องที่สุด</span>
+                    </div>
+
+                    <!-- ข้อความคำถาม -->
+                    <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 sm:p-5">
+                        <h3 id="quiz-question-text" class="font-en text-xl sm:text-2xl font-bold text-slate-800 leading-snug">
+                            Loading question...
+                        </h3>
+                        <p id="quiz-question-hint" class="text-xs sm:text-sm text-slate-500 mt-2">
+                            คำแปล: ...
+                        </p>
+                    </div>
+
+                    <!-- ตัวเลือก 4 ข้อ (A, B, C, D) -->
+                    <div id="quiz-options-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        <!-- ปุ่มตัวเลือกถูกสร้างด้วย JS -->
+                    </div>
+
+                    <!-- กล่องแสดงผลถูก-ผิดทันที พร้อมคำอธิบาย (Instant Feedback) -->
+                    <div id="quiz-feedback-box" class="hidden rounded-2xl border-3 border-slate-800 p-4 sm:p-5 space-y-3 transition-all">
+                        <div class="flex items-center gap-2.5">
+                            <span id="feedback-icon" class="text-2xl sm:text-3xl">🎉</span>
+                            <h4 id="feedback-title" class="text-lg sm:text-xl font-bold">ถูกต้องนะคร้าบ!</h4>
+                        </div>
+                        <p id="feedback-explanation" class="text-sm sm:text-base text-slate-700 leading-relaxed bg-white/80 p-3 rounded-xl border border-slate-300">
+                            คำอธิบาย...
+                        </p>
+                        <div class="flex justify-end pt-1">
+                            <button id="btn-next-question" onclick="nextQuestion()" class="anime-btn px-6 py-2.5 bg-yellow-300 hover:bg-yellow-200 text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                                <span id="btn-next-text">ข้อถัดไป</span> <span>➔</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- 4. หน้าสรุปคะแนน & เฉลย 10 ข้อ (RESULT)     -->
+        <!-- ========================================== -->
+        <section id="screen-result" class="hidden space-y-8">
+            <!-- การ์ดสรุปผลคะแนนและเหรียญรางวัล -->
+            <div class="anime-card p-6 sm:p-8 bg-gradient-to-br from-yellow-100 via-white to-sky-100 text-center space-y-6">
+                <div class="inline-block bg-slate-900 text-yellow-300 px-4 py-1 rounded-full text-xs sm:text-sm font-bold tracking-wider">
+                    🏆 MISSION COMPLETE! สรุปผลการทดสอบ
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                    <!-- มาสคอต & เหรียญรางวัล -->
+                    <div class="md:col-span-5 flex flex-col items-center">
+                        <div id="result-mascot-container" class="w-40 h-40 sm:w-48 sm:h-48 mascot-float"></div>
+                        <div id="result-rank-badge" class="mt-2 bg-gradient-to-r from-sky-400 to-yellow-400 text-slate-900 border-2 border-slate-800 px-5 py-1.5 rounded-full font-bold text-sm sm:text-base shadow-[3px_3px_0px_#1E293B]">
+                            👑 ปรมาจารย์ Past Continuous
+                        </div>
+                    </div>
+
+                    <!-- คะแนนรวม & กราฟสรุปสัดส่วนถูก-ผิด Real-time -->
+                    <div class="md:col-span-7 space-y-5 text-left bg-white/90 border-2 border-slate-800 rounded-3xl p-5 sm:p-6 shadow-[4px_4px_0px_#1E293B]">
+                        <div class="flex flex-wrap items-end justify-between gap-4 border-b-2 border-slate-100 pb-4">
+                            <div>
+                                <p class="text-sm font-bold text-slate-500">คะแนนรวมของคุณ</p>
+                                <div class="font-en text-4xl sm:text-5xl font-bold text-slate-900">
+                                    <span id="final-score" class="text-sky-600">0</span> / 10
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-slate-500">คิดเป็นเปอร์เซ็นต์</p>
+                                <div id="final-percent" class="font-en text-3xl sm:text-4xl font-bold text-yellow-600">0%</div>
+                            </div>
+                        </div>
+
+                        <!-- กราฟแท่งเปรียบเทียบข้อถูกและข้อผิดแบบ Real-time -->
+                        <div class="space-y-3">
+                            <p class="text-sm font-bold text-slate-700">📊 กราฟวิเคราะห์ผลการทำแบบทดสอบ:</p>
+                            
+                            <!-- แถบตอบถูก -->
+                            <div>
+                                <div class="flex justify-between text-xs font-bold text-emerald-700 mb-1">
+                                    <span>✅ ตอบถูกต้อง (Correct)</span>
+                                    <span id="stat-correct-label">0 ข้อ</span>
+                                </div>
+                                <div class="w-full h-5 bg-slate-100 rounded-full border-2 border-slate-800 overflow-hidden">
+                                    <div id="stat-correct-bar" class="h-full bg-emerald-400 transition-all duration-700" style="width: 0%;"></div>
+                                </div>
+                            </div>
+
+                            <!-- แถบตอบผิด -->
+                            <div>
+                                <div class="flex justify-between text-xs font-bold text-rose-700 mb-1">
+                                    <span>❌ ตอบผิด (Incorrect)</span>
+                                    <span id="stat-wrong-label">0 ข้อ</span>
+                                </div>
+                                <div class="w-full h-5 bg-slate-100 rounded-full border-2 border-slate-800 overflow-hidden">
+                                    <div id="stat-wrong-bar" class="h-full bg-rose-400 transition-all duration-700" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p id="result-comment" class="text-sm text-slate-600 bg-yellow-50 border border-yellow-300 rounded-xl p-3">
+                            ยอดเยี่ยมมาก!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ปุ่มเล่นอีกครั้ง & กลับไปทบทวน -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+                    <button onclick="startNewQuiz()" class="anime-btn w-full sm:w-auto px-7 py-3.5 bg-yellow-300 hover:bg-yellow-200 text-slate-900 text-base flex items-center justify-center gap-2">
+                        <span>🔄</span> <span>เล่นเกมอีกครั้ง (Play Again)</span>
+                    </button>
+                    <button onclick="switchScreen('lesson')" class="anime-btn w-full sm:w-auto px-7 py-3.5 bg-sky-300 hover:bg-sky-200 text-slate-900 text-base flex items-center justify-center gap-2">
+                        <span>📚</span> <span>กลับไปทบทวนบทเรียน</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ส่วนเฉลยละเอียดครบทั้ง 10 ข้อ -->
+            <div class="anime-card p-5 sm:p-8 space-y-5">
+                <div class="flex items-center justify-between border-b-2 border-slate-200 pb-4">
+                    <div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-800">📖 เฉลยละเอียดครบทั้ง 10 ข้อ (Answer Key & Review)</h3>
+                        <p class="text-sm text-slate-500">ตรวจสอบคำตอบของคุณเปรียบเทียบกับเฉลยและคำอธิบายหลักไวยากรณ์</p>
+                    </div>
+                </div>
+
+                <div id="review-list-container" class="space-y-4">
+                    <!-- รายการเฉลย 10 ข้อถูกสร้างด้วย JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ส่วนท้ายเว็บ (Footer) -->
+    <footer class="bg-slate-900 text-slate-400 text-center py-4 text-xs sm:text-sm border-t-4 border-slate-800 mt-auto">
+        <p>สื่อการเรียนรู้แบบโต้ตอบ วิชาภาษาอังกฤษ ชั้นมัธยมศึกษาปีที่ 2 เรื่อง <span class="text-yellow-400 font-en font-semibold">Past Continuous Tense</span> (ธีมฟ้า-เหลืองสดใส)</p>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- JAVASCRIPT LOGIC & ANIMATION ENGINE        -->
+    <!-- ========================================== -->
+    <script>
+        // --------------------------------------------------------
+        // 1. ระบบสร้างตัวละครมาสคอตอนิเมะ SVG ("น้องมิ้นท์ - Mint-chan")
+        //    สามารถเปลี่ยนสีหน้าได้ 4 แบบ: normal, happy, sad, excited
+        // --------------------------------------------------------
+        function getMascotSVG(mood = 'normal') {
+            let eyesSVG = '';
+            let mouthSVG = '';
+            let extraEffectSVG = '';
+
+            if (mood === 'happy' || mood === 'excited') {
+                eyesSVG = `
+                    <path d="M 66 96 Q 74 86 82 96" stroke="#1E293B" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <path d="M 118 96 Q 126 86 134 96" stroke="#1E293B" stroke-width="4" fill="none" stroke-linecap="round"/>
+                `;
+                mouthSVG = `
+                    <path d="M 90 112 Q 100 126 110 112 Z" fill="#F59E0B" stroke="#1E293B" stroke-width="2.5"/>
+                `;
+                extraEffectSVG = `
+                    <text x="22" y="55" font-size="22">✨</text>
+                    <text x="160" y="50" font-size="22">⭐</text>
+                `;
+            } else if (mood === 'sad') {
+                eyesSVG = `
+                    <path d="M 66 90 L 80 96 L 66 102" stroke="#1E293B" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M 134 90 L 120 96 L 134 102" stroke="#1E293B" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                `;
+                mouthSVG = `
+                    <path d="M 92 118 Q 100 110 108 118" stroke="#1E293B" stroke-width="3" fill="none" stroke-linecap="round"/>
+                `;
+                extraEffectSVG = `
+                    <path d="M 155 75 Q 160 85 155 92 Q 150 85 155 75 Z" fill="#38BDF8" stroke="#1E293B" stroke-width="1.5"/>
+                `;
+            } else {
+                eyesSVG = `
+                    <ellipse cx="74" cy="95" rx="7" ry="9" fill="#1E293B"/>
+                    <circle cx="71" cy="92" r="3" fill="#FFFFFF"/>
+                    <circle cx="76" cy="98" r="1.5" fill="#FFFFFF"/>
+                    <ellipse cx="126" cy="95" rx="7" ry="9" fill="#1E293B"/>
+                    <circle cx="123" cy="92" r="3" fill="#FFFFFF"/>
+                    <circle cx="128" cy="98" r="1.5" fill="#FFFFFF"/>
+                `;
+                mouthSVG = `
+                    <path d="M 93 113 Q 100 120 107 113" stroke="#1E293B" stroke-width="3" fill="none" stroke-linecap="round"/>
+                `;
+            }
+
+            return `
+            <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                <!-- ผมด้านหลังสีเหลืองพาสเทลสดใส -->
+                <path d="M 42 95 C 32 140, 45 175, 65 180 C 75 160, 75 130, 75 110 Z" fill="#FACC15" stroke="#1E293B" stroke-width="3.5"/>
+                <path d="M 158 95 C 168 140, 155 175, 135 180 C 125 160, 125 130, 125 110 Z" fill="#FACC15" stroke="#1E293B" stroke-width="3.5"/>
+                
+                <!-- หูแมวหูฟังอนิเมะ (Anime Cat Headphones) -->
+                <path d="M 46 85 C 46 42, 154 42, 154 85" stroke="#1E293B" stroke-width="7" fill="none" stroke-linecap="round"/>
+                <path d="M 46 85 C 46 42, 154 42, 154 85" stroke="#38BDF8" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <polygon points="48,58 38,28 70,45" fill="#38BDF8" stroke="#1E293B" stroke-width="3" stroke-linejoin="round"/>
+                <polygon points="152,58 162,28 130,45" fill="#38BDF8" stroke="#1E293B" stroke-width="3" stroke-linejoin="round"/>
+                <rect x="36" y="78" width="14" height="32" rx="7" fill="#FACC15" stroke="#1E293B" stroke-width="3"/>
+                <rect x="150" y="78" width="14" height="32" rx="7" fill="#FACC15" stroke="#1E293B" stroke-width="3"/>
+
+                <!-- ลำตัวชุดนักเรียนอนิเมะน่ารัก -->
+                <path d="M 65 148 L 135 148 L 145 190 L 55 190 Z" fill="#FFFFFF" stroke="#1E293B" stroke-width="3.5" stroke-linejoin="round"/>
+                <path d="M 72 148 L 100 172 L 128 148" fill="#FACC15" stroke="#1E293B" stroke-width="3" stroke-linejoin="round"/>
+                <polygon points="100,165 86,158 86,174" fill="#38BDF8" stroke="#1E293B" stroke-width="2.5"/>
+                <polygon points="100,165 114,158 114,174" fill="#38BDF8" stroke="#1E293B" stroke-width="2.5"/>
+                <circle cx="100" cy="165" r="4" fill="#F59E0B" stroke="#1E293B" stroke-width="2"/>
+
+                <!-- ใบหน้า -->
+                <path d="M 52 85 C 52 48, 148 48, 148 85 C 148 125, 125 142, 100 142 C 75 142, 52 125, 52 85 Z" fill="#FFE4D6" stroke="#1E293B" stroke-width="3.5"/>
+
+                <!-- แก้มแดงระเรื่อ -->
+                <ellipse cx="64" cy="108" rx="8" ry="4.5" fill="#F43F5E" opacity="0.85"/>
+                <ellipse cx="136" cy="108" rx="8" ry="4.5" fill="#F43F5E" opacity="0.85"/>
+
+                ${eyesSVG}
+                ${mouthSVG}
+
+                <!-- ผมหน้าม้าอนิเมะสีเหลือง -->
+                <path d="M 50 86 C 50 42, 150 42, 150 86 C 140 65, 128 76, 122 85 C 115 64, 105 75, 100 86 C 92 64, 82 75, 76 85 C 68 65, 58 76, 50 86 Z" fill="#FACC15" stroke="#1E293B" stroke-width="3.5" stroke-linejoin="round"/>
+                <polygon points="132,62 135,68 142,69 137,74 138,80 132,77 126,80 127,74 122,69 129,68" fill="#38BDF8" stroke="#1E293B" stroke-width="2"/>
+
+                ${extraEffectSVG}
+            </svg>`;
+        }
+
+        // --------------------------------------------------------
+        // 2. ระบบเปลี่ยนหน้าจอ (Navigation Controller)
+        // --------------------------------------------------------
+        function switchScreen(screenName) {
+            const screens = ['home', 'lesson', 'quiz', 'result'];
+            screens.forEach(s => {
+                document.getElementById(`screen-${s}`).classList.add('hidden');
+            });
+            document.getElementById(`screen-${screenName}`).classList.remove('hidden');
+
+            ['home', 'lesson', 'quiz'].forEach(nav => {
+                const btn = document.getElementById(`nav-${nav}`);
+                if (nav === screenName || (screenName === 'result' && nav === 'quiz')) {
+                    btn.classList.remove('bg-white');
+                    btn.classList.add('bg-yellow-300');
+                } else {
+                    btn.classList.remove('bg-yellow-300');
+                    btn.classList.add('bg-white');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --------------------------------------------------------
+        // 3. โหมดบทเรียน: ปุ่มสลับ WAS / WERE และ อนิเมชั่นเส้นเวลา Real-time
+        // --------------------------------------------------------
+        function toggleVerbBe(type) {
+            const btnWas = document.getElementById('btn-toggle-was');
+            const btnWere = document.getElementById('btn-toggle-were');
+            const display = document.getElementById('verb-be-display');
+
+            if (type === 'was') {
+                btnWas.className = 'anime-btn py-3 bg-sky-300 text-slate-900 font-en text-xl';
+                btnWere.className = 'anime-btn py-3 bg-white text-slate-700 font-en text-xl';
+                display.innerHTML = `
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-sky-300 text-slate-900 font-en font-bold px-3 py-0.5 rounded-lg border border-slate-800">WAS</span>
+                        <span class="text-sm font-bold text-slate-700">ใช้กับประธานเอกพจน์ (1 คน/สิ่ง)</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2 my-2 font-en font-bold text-base">
+                        <span class="bg-sky-100 text-sky-900 px-3 py-1 rounded-xl border border-sky-300">I</span>
+                        <span class="bg-sky-100 text-sky-900 px-3 py-1 rounded-xl border border-sky-300">He</span>
+                        <span class="bg-sky-100 text-sky-900 px-3 py-1 rounded-xl border border-sky-300">She</span>
+                        <span class="bg-sky-100 text-sky-900 px-3 py-1 rounded-xl border border-sky-300">It</span>
+                        <span class="bg-sky-100 text-sky-900 px-3 py-1 rounded-xl border border-sky-300">Mint / A cat</span>
+                    </div>
+                    <p class="text-xs text-slate-600 mt-2">
+                        ตัวอย่าง: <b>I was</b> watching TV. / <b>He was</b> cooking dinner.
+                    </p>
+                `;
+            } else {
+                btnWere.className = 'anime-btn py-3 bg-yellow-300 text-slate-900 font-en text-xl';
+                btnWas.className = 'anime-btn py-3 bg-white text-slate-700 font-en text-xl';
+                display.innerHTML = `
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-yellow-300 text-slate-900 font-en font-bold px-3 py-0.5 rounded-lg border border-slate-800">WERE</span>
+                        <span class="text-sm font-bold text-slate-700">ใช้กับ You และประธานพหูพจน์ (2+)</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2 my-2 font-en font-bold text-base">
+                        <span class="bg-yellow-100 text-yellow-900 px-3 py-1 rounded-xl border border-yellow-300">You</span>
+                        <span class="bg-yellow-100 text-yellow-900 px-3 py-1 rounded-xl border border-yellow-300">We</span>
+                        <span class="bg-yellow-100 text-yellow-900 px-3 py-1 rounded-xl border border-yellow-300">They</span>
+                        <span class="bg-yellow-100 text-yellow-900 px-3 py-1 rounded-xl border border-yellow-300">Mint and Ken</span>
+                    </div>
+                    <p class="text-xs text-slate-600 mt-2">
+                        ตัวอย่าง: <b>You were</b> studying. / <b>They were</b> running.
+                    </p>
+                `;
+            }
+        }
+
+        let currentScenario = 1;
+        let simTimer = null;
+
+        const scenariosData = {
+            1: {
+                badge: "หลักการใช้ที่ 1: กำลังทำ ณ เวลาเจาะจง",
+                clockStart: "07:45 PM",
+                enText: "Mint was reading a book at 8:00 p.m. yesterday.",
+                thText: "มิ้นท์กำลังอ่านหนังสืออยู่ตอนเวลา 2 ทุ่มเมื่อวานนี้",
+                ruleHTML: `<strong>📌 กฎข้อที่ 1:</strong> ใช้กับเหตุการณ์ที่ <b>กำลังดำเนินอยู่ ณ เวลาที่ระบุชัดเจนในอดีต</b> มักมีคำบอกเวลา เช่น <span class="font-en font-bold text-sky-700">at 8 p.m. yesterday, at this time last week</span>`,
+                sceneHTML: `
+                    <div class="text-center">
+                        <div id="actor-1" class="text-6xl transition-transform duration-300">📖👧🏻</div>
+                        <span class="inline-block mt-2 bg-sky-500/30 border border-sky-400 text-sky-200 text-xs px-2.5 py-0.5 rounded-full">
+                            กำลังอ่านหนังสืออย่างต่อเนื่อง...
+                        </span>
+                    </div>
+                `
+            },
+            2: {
+                badge: "หลักการใช้ที่ 2: กำลังทำอยู่ + มีเหตุการณ์แทรก",
+                clockStart: "08:10 PM",
+                enText: "Mint was reading a book when the phone rang.",
+                thText: "มิ้นท์กำลังอ่านหนังสืออยู่ ตอนที่เสียงโทรศัพท์ดังแทรกขึ้นมา",
+                ruleHTML: `<strong>📌 กฎข้อที่ 2 (ออกสอบบ่อย!):</strong> เหตุการณ์ที่ <b>กำลังทำอยู่ก่อน (เส้นยาว) ใช้ Past Continuous</b> ส่วนเหตุการณ์ที่ <b>เข้ามาแทรกสั้นๆ (จุดตัด) ใช้ Past Simple (V.2)</b> เชื่อมด้วย <span class="font-en font-bold text-yellow-400">when / while</span>`,
+                sceneHTML: `
+                    <div class="text-center">
+                        <div id="actor-1" class="text-5xl sm:text-6xl transition-transform duration-300">📖👧🏻</div>
+                        <span class="inline-block mt-2 bg-sky-500/30 border border-sky-400 text-sky-200 text-xs px-2 py-0.5 rounded-full">
+                            Past Continuous (ทำอยู่)
+                        </span>
+                    </div>
+                    <div id="actor-interrupt" class="text-center opacity-30 scale-75 transition-all duration-300">
+                        <div id="phone-icon" class="text-5xl sm:text-6xl">☎️💥</div>
+                        <span class="inline-block mt-2 bg-rose-500/40 border border-rose-400 text-rose-200 text-xs px-2 py-0.5 rounded-full">
+                            Past Simple (แทรก!)
+                        </span>
+                    </div>
+                `
+            },
+            3: {
+                badge: "หลักการใช้ที่ 3: ทำ 2 อย่างพร้อมกันในอดีต",
+                clockStart: "04:00 PM",
+                enText: "While Mint was studying, Ken was playing guitar.",
+                thText: "ขณะที่มิ้นท์กำลังอ่านหนังสือ เคนก็กำลังเล่นกีตาร์อยู่พร้อมๆ กัน",
+                ruleHTML: `<strong>📌 กฎข้อที่ 3:</strong> ใช้กับเหตุการณ์ <b>2 อย่างที่กำลังดำเนินอยู่ควบคู่กันไปในอดีต</b> ใช้ <b>Past Continuous ทั้งสองประโยค</b> มักเชื่อมด้วยคำว่า <span class="font-en font-bold text-yellow-600">while / as (ขณะที่)</span>`,
+                sceneHTML: `
+                    <div class="text-center">
+                        <div id="actor-1" class="text-5xl sm:text-6xl transition-transform duration-300">✍️👧🏻</div>
+                        <span class="inline-block mt-2 bg-sky-500/30 border border-sky-400 text-sky-200 text-xs px-2 py-0.5 rounded-full">
+                            Mint was studying
+                        </span>
+                    </div>
+                    <div class="text-2xl font-bold text-yellow-300">⚡ WHILE ⚡</div>
+                    <div class="text-center">
+                        <div id="actor-2" class="text-5xl sm:text-6xl transition-transform duration-300">🎸👦🏻</div>
+                        <span class="inline-block mt-2 bg-yellow-500/30 border border-yellow-400 text-yellow-200 text-xs px-2 py-0.5 rounded-full">
+                            Ken was playing
+                        </span>
+                    </div>
+                `
+            }
+        };
+
+        function selectScenario(num) {
+            currentScenario = num;
+            [1, 2, 3].forEach(i => {
+                const btn = document.getElementById(`sim-tab-${i}`);
+                if (i === num) {
+                    btn.className = 'anime-btn px-3.5 py-2 text-xs sm:text-sm bg-yellow-300 text-slate-900';
+                } else {
+                    btn.className = 'anime-btn px-3.5 py-2 text-xs sm:text-sm bg-white text-slate-700';
+                }
+            });
+
+            const data = scenariosData[num];
+            document.getElementById('stage-badge').textContent = data.badge;
+            document.getElementById('stage-clock').textContent = `🕒 ${data.clockStart}`;
+            document.getElementById('stage-en-text').textContent = data.enText;
+            document.getElementById('stage-th-text').textContent = data.thText;
+            document.getElementById('stage-scene').innerHTML = data.sceneHTML;
+            document.getElementById('scenario-rule-box').innerHTML = data.ruleHTML;
+
+            resetSimulation();
+        }
+
+        function resetSimulation() {
+            if (simTimer) clearInterval(simTimer);
+            const playhead = document.getElementById('timeline-playhead');
+            const layer = document.getElementById('timeline-dynamic-layer');
+            const status = document.getElementById('timeline-status');
+            
+            playhead.setAttribute('transform', 'translate(60, 0)');
+            status.textContent = 'กดปุ่ม "เล่นอนิเมชั่น" เพื่อดูกราฟ';
+            status.className = 'text-xs font-bold text-sky-600';
+
+            if (currentScenario === 1) {
+                layer.innerHTML = `
+                    <rect x="60" y="65" width="0" height="16" rx="8" fill="#38BDF8" id="bar-past-cont-1"/>
+                    <text x="60" y="55" font-size="12" font-weight="bold" fill="#0284C7">Past Continuous (กำลังอ่านหนังสือ)</text>
+                    <circle cx="210" cy="135" r="5" fill="#6366F1"/>
+                    <text x="210" y="118" text-anchor="middle" font-size="11" font-weight="bold" fill="#4F46E5">8:00 p.m.</text>
+                `;
+            } else if (currentScenario === 2) {
+                layer.innerHTML = `
+                    <rect x="60" y="65" width="0" height="16" rx="8" fill="#38BDF8" id="bar-past-cont-1"/>
+                    <text x="60" y="55" font-size="12" font-weight="bold" fill="#0284C7">1. Past Continuous (กำลังอ่านหนังสือ)</text>
+                    <g id="interrupt-marker" opacity="0">
+                        <line x1="220" y1="35" x2="220" y2="135" stroke="#F43F5E" stroke-width="3" stroke-dasharray="4,2"/>
+                        <circle cx="220" cy="73" r="9" fill="#F43F5E" stroke="#1E293B" stroke-width="2"/>
+                        <text x="220" y="28" text-anchor="middle" font-size="12" font-weight="bold" fill="#E11D48">2. Past Simple (โทรศัพท์ดังแทรก!)</text>
+                    </g>
+                `;
+            } else if (currentScenario === 3) {
+                layer.innerHTML = `
+                    <rect x="60" y="45" width="0" height="14" rx="7" fill="#38BDF8" id="bar-past-cont-1"/>
+                    <text x="60" y="38" font-size="11" font-weight="bold" fill="#0284C7">Mint was studying (เส้นคู่ขนานที่ 1)</text>
+                    <rect x="60" y="88" width="0" height="14" rx="7" fill="#FACC15" id="bar-past-cont-2"/>
+                    <text x="60" y="81" font-size="11" font-weight="bold" fill="#B45309">Ken was playing guitar (เส้นคู่ขนานที่ 2)</text>
+                `;
+            }
+
+            const phone = document.getElementById('actor-interrupt');
+            const phoneIcon = document.getElementById('phone-icon');
+            if (phone) phone.classList.add('opacity-30', 'scale-75');
+            if (phoneIcon) phoneIcon.classList.remove('phone-ringing');
+        }
+
+        function playSimulation() {
+            resetSimulation();
+            let progress = 0;
+            const startX = 60;
+            const maxWidth = 280;
+
+            const playhead = document.getElementById('timeline-playhead');
+            const status = document.getElementById('timeline-status');
+            status.textContent = 'กำลังจำลองเหตุการณ์ในอดีต...';
+            status.className = 'text-xs font-bold text-yellow-600 animate-pulse';
+
+            simTimer = setInterval(() => {
+                progress += 2;
+                const currentWidth = (progress / 100) * maxWidth;
+                const currentX = startX + currentWidth;
+
+                playhead.setAttribute('transform', `translate(${currentX}, 0)`);
+
+                const bar1 = document.getElementById('bar-past-cont-1');
+                if (bar1) bar1.setAttribute('width', currentWidth);
+
+                const bar2 = document.getElementById('bar-past-cont-2');
+                if (bar2) bar2.setAttribute('width', currentWidth);
+
+                const actor1 = document.getElementById('actor-1');
+                if (actor1) actor1.style.transform = progress % 16 < 8 ? 'translateY(-6px) scale(1.05)' : 'translateY(0px) scale(1)';
+                const actor2 = document.getElementById('actor-2');
+                if (actor2) actor2.style.transform = progress % 16 >= 8 ? 'translateY(-6px) scale(1.05)' : 'translateY(0px) scale(1)';
+
+                const clockEl = document.getElementById('stage-clock');
+                if (currentScenario === 1) {
+                    const mins = 45 + Math.floor((progress / 100) * 30);
+                    const hr = mins >= 60 ? '08' : '07';
+                    const mStr = String(mins % 60).padStart(2, '0');
+                    clockEl.textContent = `🕒 ${hr}:${mStr} PM ${mins === 60 ? '⭐ (8:00 PM!)' : ''}`;
+                }
+
+                if (currentScenario === 2 && progress >= 55) {
+                    const marker = document.getElementById('interrupt-marker');
+                    if (marker) marker.setAttribute('opacity', '1');
+
+                    const phoneBox = document.getElementById('actor-interrupt');
+                    const phoneIcon = document.getElementById('phone-icon');
+                    if (phoneBox) {
+                        phoneBox.classList.remove('opacity-30', 'scale-75');
+                        phoneBox.classList.add('opacity-100', 'scale-105');
+                    }
+                    if (phoneIcon) phoneIcon.classList.add('phone-ringing');
+                    clockEl.textContent = `🕒 08:15 PM (☎️ Ring!! แทรกเข้ามา)`;
+                }
+
+                if (progress >= 100) {
+                    clearInterval(simTimer);
+                    status.textContent = '✅ จำลองเหตุการณ์เสร็จสมบูรณ์!';
+                    status.className = 'text-xs font-bold text-emerald-600';
+                    const phoneIcon = document.getElementById('phone-icon');
+                    if (phoneIcon) phoneIcon.classList.remove('phone-ringing');
+                }
+            }, 45);
+        }
+
+        // --------------------------------------------------------
+        // 4. คลังข้อสอบ 10 ข้อ พร้อมเฉลยละเอียด
+        // --------------------------------------------------------
+        const quizQuestions = [
+            {
+                category: "การใช้ was / were",
+                question: "I ________ doing my English homework at 7 p.m. yesterday.",
+                hint: "คำแปล: ฉันกำลังทำการบ้านวิชาภาษาอังกฤษตอน 1 ทุ่มเมื่อวานนี้",
+                options: ["was", "were", "am", "are"],
+                correctIndex: 0,
+                explanation: "ประธานคือ 'I' ในรูปอดีต (Past Continuous) ต้องใช้คู่กับ 'was' เสมอ (I was + V.ing) ส่วน am/are เป็น Present (ปัจจุบัน)"
+            },
+            {
+                category: "ประธานพหูพจน์ (Plural Subject)",
+                question: "My friends ________ playing basketball in the gym at this time yesterday.",
+                hint: "คำแปล: เพื่อนๆ ของฉันกำลังเล่นบาสเกตบอลอยู่ในโรงยิมเวลานี้เมื่อวาน",
+                options: ["was", "were", "is", "be"],
+                correctIndex: 1,
+                explanation: "ประธาน 'My friends' เติม s แสดงว่าเป็นพหูพจน์ (หลายคน) จึงต้องใช้ 'were' ตามด้วย playing"
+            },
+            {
+                category: "การสะกดคำกริยาเติม -ing",
+                question: "Look at the photo! Ken was ________ in the pool yesterday afternoon.",
+                hint: "คำแปล: ดูรูปนี้สิ! เคนกำลังว่ายน้ำอยู่ในสระเมื่อวานตอนบ่าย",
+                options: ["swiming", "swam", "swimming", "swims"],
+                correctIndex: 2,
+                explanation: "คำกริยา 'swim' มีสระเสียงสั้น (i) 1 ตัว และตัวสะกด (m) 1 ตัว ก่อนเติม -ing ต้องเบิ้ลตัวสะกด m อีกหนึ่งตัวเป็น 'swimming'"
+            },
+            {
+                category: "ประโยคปฏิเสธ (Negative)",
+                question: "She ________ sleeping when her mom came home. She was studying.",
+                hint: "คำแปล: เธอไม่ได้กำลังหลับอยู่ตอนที่แม่กลับถึงบ้าน แต่เธอกำลังอ่านหนังสืออยู่",
+                options: ["weren't", "didn't", "wasn't", "isn't"],
+                correctIndex: 2,
+                explanation: "ประโยคต้องการรูปปฏิเสธของ Past Continuous ประธานคือ 'She' (เอกพจน์) จึงใช้ 'wasn't' (was not) + sleeping"
+            },
+            {
+                category: "ประโยคคำถาม (Interrogative)",
+                question: "________ you watching TV when I called you last night?",
+                hint: "คำแปล: เธอกำลังดูทีวีอยู่ใช่ไหมตอนที่ฉันโทรหาเมื่อคืนนี้?",
+                options: ["Was", "Did", "Do", "Were"],
+                correctIndex: 3,
+                explanation: "ประโยคคำถามขึ้นต้นด้วย Was/Were ตามด้วยประธาน + V.ing เนื่องจากประธานคือ 'You' จึงต้องใช้ 'Were' ขึ้นต้นประโยค"
+            },
+            {
+                category: "เหตุการณ์แทรก (when + Past Simple)",
+                question: "While we ________ dinner, the lights suddenly went out.",
+                hint: "คำแปล: ขณะที่พวกเรากำลังกินมื้อเย็นอยู่ ไฟก็ดับพรึ่บลงอย่างกะทันหัน",
+                options: ["were having", "was having", "had", "are having"],
+                correctIndex: 0,
+                explanation: "หลัง 'While' (ขณะที่) มักตามด้วยเหตุการณ์ที่กำลังดำเนินอยู่ (Past Continuous) ประธานคือ 'we' จึงใช้ 'were having'"
+            },
+            {
+                category: "เหตุการณ์แทรก (Past Continuous + when)",
+                question: "Tom was riding his bike to school when he ________ a cute puppy.",
+                hint: "คำแปล: ทอมกำลังปั่นจักรยานไปโรงเรียน ตอนที่เขาเห็นลูกสุนัขน่ารักตัวหนึ่ง",
+                options: ["was seeing", "sees", "saw", "seeing"],
+                correctIndex: 2,
+                explanation: "เหตุการณ์ที่เข้ามาแทรกสั้นๆ หลังคำว่า 'when' ต้องใช้ Past Simple (กริยาช่องที่ 2) ซึ่งช่อง 2 ของ see คือ 'saw'"
+            },
+            {
+                category: "2 เหตุการณ์เกิดพร้อมกัน (While)",
+                question: "While my mother was cooking, my father ________ the newspaper.",
+                hint: "คำแปล: ขณะที่คุณแม่กำลังทำอาหาร คุณพ่อก็กำลังอ่านหนังสือพิมพ์อยู่ (ทำพร้อมกัน)",
+                options: ["read", "was reading", "were reading", "reads"],
+                correctIndex: 1,
+                explanation: "เหตุการณ์ 2 อย่างที่กำลังดำเนินอยู่พร้อมกันในอดีต ใช้ Past Continuous ทั้งคู่ ประธาน 'my father' (เอกพจน์) จึงใช้ 'was reading'"
+            },
+            {
+                category: "การเปลี่ยนรูปคำกริยาลงท้ายด้วย -e",
+                question: "What were the students ________ in the notebook at 10 a.m.?",
+                hint: "คำแปล: นักเรียนกำลังเขียนอะไรลงในสมุดตอน 10 โมงเช้า?",
+                options: ["writeing", "wrote", "written", "writing"],
+                correctIndex: 3,
+                explanation: "คำกริยา 'write' ลงท้ายด้วยตัว e ก่อนเติม -ing ให้ตัด e ทิ้งแล้วเติม ing เป็น 'writing'"
+            },
+            {
+                category: "วิเคราะห์โครงสร้างประโยคสมบูรณ์",
+                question: "It ________ heavily when I woke up this morning.",
+                hint: "คำแปล: ฝนกำลังตกหนักมากตอนที่ฉันตื่นนอนเมื่อเช้านี้",
+                options: ["was raining", "were raining", "rained", "is raining"],
+                correctIndex: 0,
+                explanation: "ตอนที่ฉันตื่นนอน (when I woke up = Past Simple) ฝนกำลังตกต่อเนื่องอยู่ (Past Continuous) ประธาน 'It' ใช้คู่กับ 'was raining'"
+            }
+        ];
+
+        let currentQuestionIdx = 0;
+        let score = 0;
+        let combo = 0;
+        let userAnswers = [];
+        let isAnswered = false;
+
+        function startNewQuiz() {
+            currentQuestionIdx = 0;
+            score = 0;
+            combo = 0;
+            userAnswers = [];
+            isAnswered = false;
+
+            updateScoreBoard();
+            setQuizMascot('normal', '"อ่านโจทย์ให้ดีนะ ดูประธานกับคำบอกเวลาให้แม่นยำ สู้ๆ จ้า!"');
+            renderQuestion();
+            switchScreen('quiz');
+        }
+
+        function updateScoreBoard() {
+            document.getElementById('quiz-score').textContent = score;
+            document.getElementById('quiz-current-num').textContent = currentQuestionIdx + 1;
+            const pct = ((currentQuestionIdx + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress-pct').textContent = `${pct}%`;
+            document.getElementById('quiz-progress-bar').style.width = `${pct}%`;
+
+            const comboBadge = document.getElementById('combo-badge');
+            if (combo >= 2) {
+                comboBadge.classList.remove('hidden');
+                document.getElementById('quiz-combo').textContent = combo;
+            } else {
+                comboBadge.classList.add('hidden');
+            }
+        }
+
+        function setQuizMascot(mood, message) {
+            const container = document.getElementById('quiz-mascot-container');
+            container.innerHTML = getMascotSVG(mood);
+            document.getElementById('quiz-mascot-msg').textContent = message;
+
+            container.classList.remove('mascot-happy', 'mascot-sad');
+            void container.offsetWidth;
+            if (mood === 'happy') container.classList.add('mascot-happy');
+            if (mood === 'sad') container.classList.add('mascot-sad');
+        }
+
+        function renderQuestion() {
+            isAnswered = false;
+            const q = quizQuestions[currentQuestionIdx];
+
+            document.getElementById('quiz-category').textContent = `หมวด: ${q.category}`;
+            document.getElementById('quiz-question-text').textContent = `${currentQuestionIdx + 1}. ${q.question}`;
+            document.getElementById('quiz-question-hint').textContent = q.hint;
+
+            const feedbackBox = document.getElementById('quiz-feedback-box');
+            feedbackBox.classList.add('hidden');
+
+            const optionsGrid = document.getElementById('quiz-options-grid');
+            const labels = ['A', 'B', 'C', 'D'];
+            optionsGrid.innerHTML = '';
+
+            q.options.forEach((optText, idx) => {
+                const btn = document.createElement('button');
+                btn.id = `option-btn-${idx}`;
+                btn.className = 'anime-btn p-4 bg-white hover:bg-yellow-50 text-left flex items-center gap-3 text-base sm:text-lg';
+                btn.onclick = () => handleSelectAnswer(idx);
+                btn.innerHTML = `
+                    <span class="w-9 h-9 rounded-xl bg-yellow-300 border-2 border-slate-800 flex items-center justify-center font-en font-bold text-slate-900 flex-shrink-0">
+                        ${labels[idx]}
+                    </span>
+                    <span class="font-en font-semibold text-slate-800">${optText}</span>
+                `;
+                optionsGrid.appendChild(btn);
+            });
+        }
+
+        function triggerCelebrationStars() {
+            const emojis = ['⭐', '✨', '🎉', '💖', '🌟'];
+            for (let i = 0; i < 14; i++) {
+                const star = document.createElement('div');
+                star.className = 'confetti-star text-2xl sm:text-3xl';
+                star.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                star.style.left = `${15 + Math.random() * 70}vw`;
+                star.style.top = `${20 + Math.random() * 55}vh`;
+                document.body.appendChild(star);
+                setTimeout(() => star.remove(), 950);
+            }
+        }
+
+        function handleSelectAnswer(selectedIndex) {
+            if (isAnswered) return;
+            isAnswered = true;
+
+            const q = quizQuestions[currentQuestionIdx];
+            const isCorrect = selectedIndex === q.correctIndex;
+
+            userAnswers.push({
+                questionIdx: currentQuestionIdx,
+                selectedIndex: selectedIndex,
+                isCorrect: isCorrect
+            });
+
+            q.options.forEach((_, idx) => {
+                const btn = document.getElementById(`option-btn-${idx}`);
+                btn.disabled = true;
+
+                if (idx === q.correctIndex) {
+                    btn.classList.remove('bg-white', 'hover:bg-yellow-50');
+                    btn.classList.add('bg-emerald-300', 'border-emerald-900');
+                } else if (idx === selectedIndex && !isCorrect) {
+                    btn.classList.remove('bg-white', 'hover:bg-yellow-50');
+                    btn.classList.add('bg-rose-300', 'border-rose-900');
+                }
+            });
+
+            const feedbackBox = document.getElementById('quiz-feedback-box');
+            const feedbackIcon = document.getElementById('feedback-icon');
+            const feedbackTitle = document.getElementById('feedback-title');
+            const feedbackExp = document.getElementById('feedback-explanation');
+
+            feedbackBox.classList.remove('hidden', 'bg-emerald-100', 'bg-rose-100');
+
+            if (isCorrect) {
+                score++;
+                combo++;
+                feedbackBox.classList.add('bg-emerald-100');
+                feedbackIcon.textContent = '🎉';
+                feedbackTitle.textContent = combo >= 3 ? `สุดยอด! ถูกต้องต่อเนื่อง ${combo} ข้อติด!` : 'ถูกต้องเก่งมากจ้า! (+1 คะแนน)';
+                feedbackTitle.className = 'text-lg sm:text-xl font-bold text-emerald-800';
+                setQuizMascot('happy', '"ว้าว! เก่งสุดๆ ไปเลย ตอบถูกเป๊ะตามหลักไวยากรณ์!"');
+                triggerCelebrationStars();
+            } else {
+                combo = 0;
+                feedbackBox.classList.add('bg-rose-100');
+                feedbackIcon.textContent = '💡';
+                feedbackTitle.textContent = `ยังไม่ถูกน้า คำตอบที่ถูกคือข้อ ${['A', 'B', 'C', 'D'][q.correctIndex]}`;
+                feedbackTitle.className = 'text-lg sm:text-xl font-bold text-rose-800';
+                setQuizMascot('sad', '"ไม่เป็นไรนะ! ลองอ่านคำอธิบายด้านล่าง แล้วลุยข้อต่อไปกัน!"');
+            }
+
+            feedbackExp.innerHTML = `<strong>📖 คำอธิบาย:</strong> ${q.explanation}`;
+            updateScoreBoard();
+
+            const nextBtnText = document.getElementById('btn-next-text');
+            nextBtnText.textContent = currentQuestionIdx === quizQuestions.length - 1 ? 'ดูผลคะแนนและเฉลยทั้งหมด 🏆' : 'ข้อถัดไป';
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIdx < quizQuestions.length - 1) {
+                currentQuestionIdx++;
+                updateScoreBoard();
+                setQuizMascot('normal', '"ข้อต่อไปมาแล้ว! สังเกตประธานและคำกริยาให้ดีนะ"');
+                renderQuestion();
+            } else {
+                showResultScreen();
+            }
+        }
+
+        // --------------------------------------------------------
+        // 5. หน้าสรุปผลคะแนน & แสดงเฉลยครบทั้ง 10 ข้อ
+        // --------------------------------------------------------
+        function showResultScreen() {
+            switchScreen('result');
+
+            const total = quizQuestions.length;
+            const wrongCount = total - score;
+            const percent = Math.round((score / total) * 100);
+
+            document.getElementById('final-score').textContent = score;
+            document.getElementById('final-percent').textContent = `${percent}%`;
+
+            document.getElementById('stat-correct-label').textContent = `${score} ข้อ (${percent}%)`;
+            document.getElementById('stat-wrong-label').textContent = `${wrongCount} ข้อ (${100 - percent}%)`;
+            
+            setTimeout(() => {
+                document.getElementById('stat-correct-bar').style.width = `${percent}%`;
+                document.getElementById('stat-wrong-bar').style.width = `${100 - percent}%`;
+            }, 100);
+
+            const resultMascot = document.getElementById('result-mascot-container');
+            const rankBadge = document.getElementById('result-rank-badge');
+            const resultComment = document.getElementById('result-comment');
+
+            if (score >= 8) {
+                resultMascot.innerHTML = getMascotSVG('excited');
+                rankBadge.textContent = '👑 ปรมาจารย์ Past Continuous';
+                resultComment.textContent = 'ยอดเยี่ยมระดับเทพ! เธอเข้าใจการใช้ Past Continuous Tense อย่างทะลุปรุโปร่ง พร้อมลุยข้อสอบจริงในห้องเรียนแล้ว!';
+                triggerCelebrationStars();
+            } else if (score >= 5) {
+                resultMascot.innerHTML = getMascotSVG('happy');
+                rankBadge.textContent = '⭐ นักเรียนดีเด่นประจำคลาส';
+                resultComment.textContent = 'ทำได้ดีมาก! เข้าใจหลักการส่วนใหญ่แล้ว ลองทบทวนเฉลยข้อที่พลาดด้านล่างอีกนิด รับรองเต็ม 10 แน่นอน!';
+            } else {
+                resultMascot.innerHTML = getMascotSVG('normal');
+                rankBadge.textContent = '🌱 นักผจญภัยฝึกหัด';
+                resultComment.textContent = 'ความพยายามอยู่ที่ไหน ความสำเร็จอยู่ที่นั่น! ลองอ่านเฉลยด้านล่างและกลับไปเล่นกราฟอนิเมชั่นในบทเรียน แล้วมาแก้มือใหม่นะ!';
+            }
+
+            const reviewContainer = document.getElementById('review-list-container');
+            const labels = ['A', 'B', 'C', 'D'];
+            reviewContainer.innerHTML = '';
+
+            quizQuestions.forEach((q, idx) => {
+                const userAns = userAnswers[idx];
+                const isCorrect = userAns ? userAns.isCorrect : false;
+                const chosenText = userAns ? `${labels[userAns.selectedIndex]}. ${q.options[userAns.selectedIndex]}` : 'ไม่ได้ตอบ';
+                const correctText = `${labels[q.correctIndex]}. ${q.options[q.correctIndex]}`;
+
+                const card = document.createElement('div');
+                card.className = `p-4 sm:p-5 rounded-2xl border-2 ${isCorrect ? 'bg-emerald-50/70 border-emerald-500' : 'bg-rose-50/70 border-rose-400'}`;
+                card.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <span class="font-bold text-sm ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">
+                            ${isCorrect ? '✅ ข้อที่ ' + (idx + 1) + ' (ตอบถูก)' : '❌ ข้อที่ ' + (idx + 1) + ' (ตอบผิด)'}
+                        </span>
+                        <span class="text-xs bg-white px-2.5 py-0.5 rounded-full border border-slate-300 text-slate-600">
+                            ${q.category}
+                        </span>
+                    </div>
+                    <p class="font-en font-bold text-base sm:text-lg text-slate-800 mb-2">${q.question}</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm mb-3">
+                        <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                            <span class="text-slate-500">คำตอบของคุณ:</span> 
+                            <span class="font-en font-bold ${isCorrect ? 'text-emerald-600' : 'text-rose-600'}">${chosenText}</span>
+                        </div>
+                        <div class="bg-white p-2.5 rounded-xl border border-emerald-300">
+                            <span class="text-slate-500">เฉลยที่ถูกต้อง:</span> 
+                            <span class="font-en font-bold text-emerald-700">${correctText}</span>
+                        </div>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-700 bg-white/90 p-3 rounded-xl border border-slate-200">
+                        <strong>💡 คำอธิบาย:</strong> ${q.explanation}
+                    </p>
+                `;
+                reviewContainer.appendChild(card);
+            });
+        }
+
+        window.onload = function () {
+            document.getElementById('home-mascot-container').innerHTML = getMascotSVG('normal');
+            toggleVerbBe('was');
+            selectScenario(1);
+        };
+    </script>
+</body>
+</html>
